@@ -2,7 +2,11 @@
 @import "./variables";
 @import "./media";
 
+main, body {
+  margin: 0;
+}
 
-main {
-  margin-top: 6em;
+.container {
+  max-width: 1200px;
+  overflow: hidden;
 }

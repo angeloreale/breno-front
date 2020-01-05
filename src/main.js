@@ -3,25 +3,11 @@ import './assets/scss/main.scss'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-// import axios from 'axios'
+import VModal from 'vue-js-modal'
 
 Vue.config.productionTip = false
 
-let serverURL = ''
-
-function setServerURL () {
-  if (process.env.NODE_ENV === 'development') {
-    serverURL = 'http://localhost:3000'
-  } else {
-    serverURL = 'https://dhruid.com'
-  }
-
-  window.serverURL = serverURL
-}
-
-setServerURL()
-
-// axios.defaults.withCredentials = true
+Vue.use(VModal)
 
 new Vue({
   router,
