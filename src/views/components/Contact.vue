@@ -11,10 +11,10 @@
           p.contact__address__item__details(v-html="'214 R. Ilhéus <br/> Salvador - BA, 41940-570 BR'")
       .column
         form.contact__form
-          input.contact__form__input(name="form__name", type="text", placeholder="Name")
-          input.contact__form__input(name="form__email", type="email", placeholder="Email")
-          textarea.contact__form__textarea(name="form__message", placeholder="Message", rows=5)
-          button.contact__form__btn="Send message"
+          input.contact__form__input(name="form__name", type="text", placeholder="Name", v-model="form__name")
+          input.contact__form__input(name="form__email", type="email", placeholder="Email", v-model="form__email")
+          textarea.contact__form__textarea(name="form__message", placeholder="Message", rows=5, v-model="form__message")
+          button.contact__form__btn(@click="sendForm($event)")="Send message"
       .contact__phone.column
         h3.contact__phone__title="Or give us a call"
         p.contact__phone__details="+55 (11) 94466-6162"
@@ -28,7 +28,21 @@ export default {
   },
   props: {
   },
+  data () {
+    return {
+      form__name: '',
+      form__email: '',
+      form__message: ''
+    }
+  },
   methods: {
+    async sendForm (e) {
+      e.preventDefault()
+      await this.$recaptchaLoaded()
+      const token = await this.$recaptcha('login')
+      let payload = { form__name: this.form__name, form__email: this.form__email, form__message: this.form__message, token: token }
+      this.$store.dispatch('sendEmail', payload)
+    }
   }
 }
 </script>
