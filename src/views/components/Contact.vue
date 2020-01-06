@@ -10,11 +10,14 @@
           h3.contact__address__item__city="Salvador"
           p.contact__address__item__details(v-html="'214 R. Ilhéus <br/> Salvador - BA, 41940-570 BR'")
       .column
-        form.contact__form
+        img.contact__form__spinner(v-if="!messageSent && sendingMessage", src="../../assets/spinner.svg")
+        form.contact__form(v-if="!messageSent && !sendingMessage && !messageError")
           input.contact__form__input(name="form__name", type="text", placeholder="Name", v-model="form__name")
           input.contact__form__input(name="form__email", type="email", placeholder="Email", v-model="form__email")
           textarea.contact__form__textarea(name="form__message", placeholder="Message", rows=5, v-model="form__message")
           button.contact__form__btn(@click="sendForm($event)")="Send message"
+        .contact__form__success(v-if="messageSent && !sendingMessage && !messageError")="Message sent!"
+        .contact__form__error(v-if="messageError && !sendingMessage && !messageSent")="There was an error sending your message, please try again later or give us a call."
       .contact__phone.column
         h3.contact__phone__title="Or give us a call"
         p.contact__phone__details="+55 (11) 94466-6162"
@@ -35,13 +38,34 @@ export default {
       form__message: ''
     }
   },
+  computed: {
+    messageSent () {
+      return this.$store.state.messageSent
+    },
+    sendingMessage () {
+      return this.$store.state.sending
+    },
+    messageError () {
+      this.updateError()
+      return this.$store.state.messageError
+    }
+  },
   methods: {
     async sendForm (e) {
+      this.$store.commit('sendingMessage')
       e.preventDefault()
       await this.$recaptchaLoaded()
       const token = await this.$recaptcha('login')
+      console.log(token)
       let payload = { form__name: this.form__name, form__email: this.form__email, form__message: this.form__message, token: token }
       this.$store.dispatch('sendEmail', payload)
+    },
+    async updateError () {
+      if (this.$store.state.messageError) {
+        setTimeout(() => {
+          this.$store.commit('consolidateMessageError')
+        }, 4000)
+      }
     }
   }
 }
@@ -97,6 +121,8 @@ export default {
 
   .column {
     width: 33%;
+    display: flex;
+    flex-direction: column;
     @include lg-down {
       width: 100%;
     }
@@ -142,6 +168,20 @@ export default {
       color: $black;
       font-family: $cft;
       border-radius: 5px;
+    }
+
+    &__success, &__error {
+      background-color: $white;
+      border-radius: 5px;
+      color: $black;
+      font-family: $cft;
+      font-size: 16px;
+      padding: 2em;
+    }
+
+    &__error {
+      background-color: #ff6961;
+      color: $white;
     }
   }
 

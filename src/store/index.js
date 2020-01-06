@@ -6,11 +6,21 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    messageSent: false
+    messageSent: false,
+    sending: false,
+    messageError: false
   },
   mutations: {
     consolidateMessageSent (state) {
-      this.messageSent = true
+      state.messageSent = true
+      state.sending = false
+    },
+    sendingMessage (state) {
+      state.sending = true
+    },
+    consolidateMessageError (state) {
+      state.sending = false
+      state.messageError = !state.messageError
     }
   },
   actions: {
@@ -25,7 +35,13 @@ export default new Vuex.Store({
           if (res.statusText === 'OK') {
             console.log('message sent')
             this.commit('consolidateMessageSent')
+          } else {
+            console.log('promise error')
+            this.commit('consolidateMessageError')
           }
+        }).catch(() => {
+          console.log('catch error')
+          this.commit('consolidateMessageError')
         })
     }
   },
