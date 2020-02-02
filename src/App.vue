@@ -3,6 +3,9 @@
     navbar
     <router-view/>
     .hp__footer
+      .hp__footer__socials
+        a(href='https://instagram.com/eubrenocunha', target='_blank', rel='noreferrer noopener')
+          span.hp__footer__socials__ig
       small.hp__footer__copy(v-html="`© Copyright 2009-${new Date().getUTCFullYear()}<br /> Irmãos Reale Desenvolvimento de Softwares Ltda.<br />All rights reserved.`")
   </div>
 </template>
@@ -34,8 +37,8 @@ export default {
   &__footer {
     height: fit-content;
     padding: 1em;
-    background-color: #2a2a2a;
-    color: $white;
+    background-color: $white;
+    color: $blue;
     font-family: $cft;
     display: flex;
     justify-content: center;
@@ -46,9 +49,22 @@ export default {
     box-sizing: border-box;
     left: 0;
     min-height: 400px;
+    flex-direction: column;
+    justify-content: space-around;
 
     &__copy {
       max-width: 50%;
+    }
+
+    &__socials {
+      &__ig {
+        mask: url('./assets/instagram.svg') no-repeat center;
+        -webkit-mask: url('./assets/instagram.svg') no-repeat center;
+        background-color: $blue;
+        width: 30px;
+        height: 30px;
+        display: block;
+      }
     }
   }
 }

@@ -1,21 +1,22 @@
 <template lang="pug">
   section#services
-    h2.services__title="Solutions"
     .container
-      ul.services
-        li.services__item(v-for="(service, index) in servicesData", :key="index" )
-          h3.services__item__title="{{service.title}}"
-          p.services__item__tag="{{service.tagline}}"
+      h2.services__title="Psicoterapia baseada em evidencias para ansiedade, pânico, medo, depressão, fobias, problemas de relacionamentos e autoconhecimento."
+      p.services__text=`Ser controlado e vencido pelo medo e ansiedade é uma merda. Imagine como sua vida poderia ser diferente se você fosse capaz de superar seus maiores medos e parar de lutar com a ansiedade e depressão.`
+      p.services__text=`Faço uso de um processo científico testado e comprovado, que ira te auxiliar construir confiança, compreender e dominar o medo e ansiedade para viver a vida em sua melhor versão, de forma rica, bela e significativa.`
+      button-router(text="Comece" link="/servicos" isWhite btnType="router")
 
 </template>
 
 <script>
 
 import ServicesData from '../data/servicesData'
+import ButtonRouter from './ButtonRouter'
 
 export default {
   name: 'Services',
   components: {
+    ButtonRouter
   },
   props: {
     servicesData: {
@@ -31,7 +32,7 @@ export default {
 #services {
   position: relative;
   max-width: 100%;
-  background-color: $black;
+  background-color: $blue;
   min-height: 480px;
   display: flex;
   justify-content: center;
@@ -42,7 +43,11 @@ export default {
   .container {
     display: flex;
     flex-direction: column;
-    margin-top: 3em;
+    margin-top: 1em;
+
+    @include lg-down {
+      padding: 2rem;
+    }
   }
 }
 
@@ -62,26 +67,17 @@ export default {
     font-size: 36px;
     font-family: $cft;
     color: $white;
-    margin-top: 3em;
-  }
-  &__item {
-    text-align: left;
-    padding: 3em;
-    width: calc(29% - 3em);
-    @include lg-down {
-      width: 100%;
-      padding: 0 2em;
-      box-sizing: border-box;
-    }
+    margin-top: 1em;
 
-    &__title {
-      font-family: $cft;
-      font-weight: 900;
-      font-size: 20px;
+    @include lg-down {
+      font-size: 24px;
     }
-    &__tag {
-      font-family: $ops;
-    }
+  }
+  &__text {
+    text-align: left;
+    color: $white;
+    font-family: $ops;
+    font-size: 20px;
   }
 }
 </style>

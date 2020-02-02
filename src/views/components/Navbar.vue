@@ -3,12 +3,15 @@
     .nav__container
       img.nav__logo(src="../../assets/logo.svg", alt="Reale Brothers Logo")
       ul.nav__ul(:class="{isActive: showNav}")
-        li.nav__ul__li(@click="scrollTo('#services')")
-          .nav__ul__links(href="javascript:void(0)")="Services"
-        li.nav__ul__li(@click="scrollTo('#portfolio')")
-          .nav__ul__links(href="javascript:void(0)")="Portfolio"
-        li.nav__ul__li(@click="scrollTo('#contact')")
-          .nav__ul__links(href="javascript:void(0)")="Contact"
+        router-link.nav__ul__li(to="/servicos")
+          .nav__ul__links(href="javascript:void(0)")="Serviços"
+        router-link.nav__ul__li(to="/perfil")
+          .nav__ul__links(href="javascript:void(0)")="Perfil"
+        router-link.nav__ul__li(to="/contato")
+          .nav__ul__links(href="javascript:void(0)")="Contato"
+        router-link.nav__ul__li(to="/agendamento")
+          .nav__ul__links(href="javascript:void(0)")="Agendamento"
+
       .nav--button(@click="toggleMenu", :class="{ isActive: showNav }")
         span
         span
@@ -68,10 +71,11 @@ export default {
   }
 
   &__logo {
-    max-width: 150px;
+    max-width: 300px;
     z-index: 1;
     @include lg-down {
-      margin-left: 4em;
+      margin-left: 1em;
+      max-width: 200px;
     }
   }
   &__ul {
@@ -109,23 +113,19 @@ export default {
 
     &__li {
       margin: 0 1em;
+      color: $blue;
+      text-decoration: none;
+      font-weight: 700;
 
-      div {
-        color: $black;
+      &, &:link, &:hover {
         text-decoration: none;
-        font-weight: 700;
-
-        &:visited, &:focus, &:active {
-          color: $black;
-          text-decoration: none;
-        }
       }
     }
   }
 
   &--button {
     position: absolute;
-    right: 4em;
+    right: 3em;
     top: 38px;
 
     span {

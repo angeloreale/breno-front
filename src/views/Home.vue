@@ -2,9 +2,6 @@
   main
     hero
     services
-    portfolio
-    JobModal
-    contact
 </template>
 
 <script>

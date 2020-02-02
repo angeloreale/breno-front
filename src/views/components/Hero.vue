@@ -2,14 +2,12 @@
   section.wrapper#hero
     .hero
       section.hero__typer
-        span.hero__typer__text="return "
-          vue-typer.hero__typer__text__animated(:text='["Innovative;", "Robust;", "Creative;", "Effective;", "Simple;", "Performant;", "Beautiful;", "Clean;", "Purposeful;"]', :shuffle=false, eraseStyle="backspace", :eraseDelay=60)
+        span.hero__typer__text="Você mais "
+          vue-typer.hero__typer__text__animated(:text='["livre.", "autêntico.", "realizado.", "consciente."]', :shuffle=false, eraseStyle="backspace", :eraseDelay=60)
 
     .hero__bg
       .overlay
-      <video playsInline="playsinline" autoPlay="autoplay" muted="muted" loop="loop">
-        <source src='../../assets/banner-compressed.mp4' type="video/mp4"/>
-      </video>
+      <img src='../../assets/banner.jpg' />
 
 </template>
 
@@ -29,7 +27,10 @@ export default {
 .caret {
   width: 3px !important;
   margin: 4px;
-  background-color: $black !important;
+  background-color: $blue !important;
+}
+.typed {
+  color: $blue !important;
 }
 </style>
 
@@ -41,6 +42,8 @@ export default {
   justify-content: center;
   align-items: center;
   max-width: 100%;
+  max-height: 50vh;
+  overflow: hidden;
 }
 
 .hero {
@@ -63,7 +66,7 @@ export default {
     max-width: 100%;
     overflow: hidden;
 
-    video {
+    img {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -85,7 +88,7 @@ export default {
       height: 100%;
       width: 100%;
       background-color: white;
-      opacity: 0.75;
+      opacity: 0.88;
       z-index: 2;
     }
   }
@@ -96,11 +99,14 @@ export default {
     position: absolute;
     z-index: 4;
     font-weight: 100;
+    @include lg-down {
+      font-size: 24px;
+    }
 
     &__text {
       &__animated {
         font-weight: 500;
-        color: $black;
+        color: $blue;
       }
     }
   }
