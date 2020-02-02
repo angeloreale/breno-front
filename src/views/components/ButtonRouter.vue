@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-link v-if="btnType === 'router'" class="btn" :class="{isWhite: isWhite, isBlue: isBlue}" :to="link">{{ text }}</router-link>
-    <a v-if="btnType === 'link'" class="btn" :class="{isWhite: isWhite, isBlue: isBlue}" :href="link">{{ text }}</a>
+    <a v-if="btnType === 'link'" class="btn" :class="{isWhite: isWhite, isBlue: isBlue}" :href="link" target="_blank" rel="noreferrer noopener">{{ text }}</a>
   </div>
 </template>
 

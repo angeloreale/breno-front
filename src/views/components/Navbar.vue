@@ -7,10 +7,8 @@
           .nav__ul__links(href="javascript:void(0)")="Serviços"
         router-link.nav__ul__li(to="/perfil")
           .nav__ul__links(href="javascript:void(0)")="Perfil"
-        router-link.nav__ul__li(to="/contato")
-          .nav__ul__links(href="javascript:void(0)")="Contato"
-        router-link.nav__ul__li(to="/agendamento")
-          .nav__ul__links(href="javascript:void(0)")="Agendamento"
+        .nav__ul__li
+          a.nav__ul__links(href="https://calendly.com/brenocunha", target="_blank", rel="noreferrer noopener")="Agendamento"
 
       .nav--button(@click="toggleMenu", :class="{ isActive: showNav }")
         span
@@ -119,6 +117,12 @@ export default {
 
       &, &:link, &:hover {
         text-decoration: none;
+      }
+      a {
+        &, &:link, &:hover {
+          text-decoration: none;
+          color: $blue;
+        }
       }
     }
   }

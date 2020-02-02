@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="service__step">
-      <h1 class="service__step__title">Step {{ stepNumber }}. <span class="service__step__title__header">{{stepTitle}}</span></h1>
+      <h1 class="service__step__title">{{ stepNumber }}. <span class="service__step__title__header">{{stepTitle}}</span></h1>
       <div class="service__step__content" v-html="stepContent"></div>
       <button-router class="service__step__cta" :link="stepCtaLink" :text="stepCtaText" isBlue btnType="link"></button-router>
     </div>

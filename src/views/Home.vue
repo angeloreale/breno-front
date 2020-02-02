@@ -8,21 +8,12 @@
 
 import Hero from './components/Hero'
 import Services from './components/Services'
-import Portfolio from './components/Portfolio'
-import Contact from './components/Contact'
-
-import VueTyper from 'vue-typer'
-import JobModal from './components/JobModal'
 
 export default {
   name: 'Home',
   components: {
     Hero,
-    Services,
-    Portfolio,
-    Contact,
-    VueTyper,
-    JobModal
+    Services
   },
   data: function () {
     return {
@@ -30,13 +21,6 @@ export default {
     }
   },
   computed: {
-    // images
-    logoImage () {
-      return require(`../assets/${process.env.VUE_APP_IMAGE_LOGO}`)
-    },
-    contactImage () {
-      return require(`../assets/${process.env.VUE_APP_IMAGE_CONTACT}`)
-    }
   },
   mounted () {
   },
